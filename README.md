@@ -1,4 +1,4 @@
-# DevOps
+![DevOps poster](./Assets/DevOps%20poster.png)
 
 Documenting my all learning and resources of DevOps
 
