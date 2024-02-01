@@ -15,6 +15,7 @@
 - [Notion Notes]()
 - [Video Courses]()
 - [Blog resource]()
+- [Linux Cheatsheet](https://cheatography.com/davechild/cheat-sheets/linux-command-line/)
 
 <br>
 
