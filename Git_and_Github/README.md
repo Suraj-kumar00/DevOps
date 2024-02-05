@@ -18,8 +18,18 @@ But why it is called VCS:
 
 ## GitHub:
 
-It is an online website where developers push their code.
+It is an online website where developers push their code, store and collaborate.It allows us to host our Git Repositories. A repository is just a folder where all the changes are saved.
 
+Like GitHub, some platforms allow you to host your repository:
+
+- Bitbucket
+
+- Gitlab etc.
+
+
+
+
+## Some Differences between Git and GitHub
 ![Difference Betwene Git And GitHub](../Assets/git-github-difference.png)
 
 ---
