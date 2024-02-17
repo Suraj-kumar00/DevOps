@@ -3,7 +3,7 @@
 ## How it all started?
 
 - The Cold was going on the United States and the soviet union were battling one another like who was going to be the first.
-- And when it came to launching the world's first satellite Russia (the soviet union) won, they launched ***Sputnik*** 1 the first artificial Earth satellite. It was launched into an elliptical low Earth orbit by the Soviet Union on 4 October 1957.
+- And when it came to launching the world's first satellite Russia (the soviet union) won, they launched **_Sputnik_** 1 the first artificial Earth satellite. It was launched into an elliptical low Earth orbit by the Soviet Union on 4 October 1957.
 - So in this competition, the U.S was not silent but they launched their first program named ARPA(Advance Research Project Agency) and it worked to do all the scientific discoveries and keep their country no.1
 - ARPANET: **ARPANET was the first operational computer network that became the foundation of the modern internet**. ARPANET is defined as the first computer network that used packet switching to connect geographically dispersed computers and laid the foundation for developing the Internet.
 
@@ -30,6 +30,7 @@ this is the world's first website:[http://info.cern.ch](http://info.cern.ch/)./
 - various countries and continents across the world we are connected via wires these wires are laid under the oceans.
 
 ”So the internet is not like in the clouds but it’s under the sea”
+
 - Submarine cables map (Optical Fibre Cable)
 
 ![Submarine Cables Map(optical fiber cables)](../Assets/internetunderthesea.png)
@@ -38,3 +39,7 @@ Submarine Cables Map(optical fiber cables)
 
 - Your computer/laptop can work as a client and server.
 - this is the typical client-server model:
+
+---
+
+### Read the complete blog here [Computer Networking]()
