@@ -42,4 +42,4 @@ Submarine Cables Map(optical fiber cables)
 
 ---
 
-### Read the complete blog here [Computer Networking]()
+### Read the complete blog here [Computer Networking](https://surajk00.hashnode.dev/computer-networking-course-how-does-the-internet-work)
