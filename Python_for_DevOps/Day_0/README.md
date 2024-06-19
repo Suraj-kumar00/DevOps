@@ -23,9 +23,9 @@
 
 ## Day 4: Functions, Modules and Packages
 
-- What are differences between function, modules and packages ?
-- How to import a package ?
-- What are Python workspaces ?
+- What are differences between function, modules and packages?
+- How to import a package?
+- What are Python workspaces?
 
 ## Day 5: Environment Variables and Command Line Arguments
 

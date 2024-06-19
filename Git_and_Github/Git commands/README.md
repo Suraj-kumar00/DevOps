@@ -14,8 +14,7 @@ Here are some commonly used Git commands that you will use daily.
 - `git merge <branch>`: Merges the specified branch’s history into the current branch.
 - `git log`: Displays committed snapshots. Useful for viewing changes to the project over time.
 
-
-## Some more advace Git commands:
+## Some more advanced Git commands:
 
 As a DevOps engineer, you might find yourself using a wider range of Git commands to manage complex workflows. Here are some additional commands that could be useful:
 
@@ -25,5 +24,5 @@ As a DevOps engineer, you might find yourself using a wider range of Git command
 - `git fetch <remote>`: Fetches all branches from the remote repository.
 - `git rebase <branch>`: Reapply commits on top of another base tip.
 - `git stash`: Temporarily saves changes that you don’t want to commit immediately.
-- `git tag <tagname>`: Marks a specific commit with a simple, human readable handle that never moves.
+- `git tag <tagname>`: Marks a specific commit with a simple, human-readable handle that never moves.
 - `git cherry-pick <commit>`: Apply the changes introduced by some existing commits.
