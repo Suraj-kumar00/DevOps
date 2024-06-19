@@ -61,7 +61,7 @@
 
 ## YAML
 
-- [Notion Notes]()
+- [Notion Notes](https://www.notion.so/surajkumar00/YAML-356715dae3fa432a8af713cf38e9fbdd)
 - [Video Courses]()
 - [Blog resource]()
 
