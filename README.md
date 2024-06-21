@@ -13,7 +13,7 @@
 ## Understanding DevOps
 
 - [Notion Notes]()
-- [Video Courses]()
+- [Video Courses](https://www.youtube.com/watch?v=0yWAtQ6wYNM&pp=ygUOd2hhdCBpcyBkZXZvcHM%3D)
 - [Blog resource]()
 
 <br>
