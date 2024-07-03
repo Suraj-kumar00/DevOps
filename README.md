@@ -1,4 +1,4 @@
-![DevOps poster](./Assets/DevOps%20poster.png)
+![DevOps poster](./Assets/DevOps_poster.png)
 
 <h3 align= "center"> Documenting my all learning and resources of DevOps </h3>
 
