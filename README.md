@@ -89,34 +89,34 @@
 
 <br>
 
-## Containerization/Docker
+## Docker
 
 - [Notion Notes]()
-- [Video Courses]()
-- [Blog resource]()
+- [Video Courses](https://github.com/Suraj-kumar00/DevOps/tree/main/Docker/Video_Resources)
+- [Blog resource](https://github.com/Suraj-kumar00/DevOps/tree/main/Docker/Blog_Resources)
 
 <br>
 
 ## Kubernetes
 
 - [Notion Notes]()
-- [Video Courses]()
-- [Blog resource]()
+- [Video Courses](https://github.com/Suraj-kumar00/DevOps/tree/main/Kubernetes/Video_Resources)
+- [Blog resource](https://github.com/Suraj-kumar00/DevOps/tree/main/Kubernetes/Blog_Resources)
   <br>
 
 ## CI/CD
 
 - [Notion Notes]()
-- [Video Courses]()
-- [Blog resource]()
+- [Video Courses](https://github.com/Suraj-kumar00/DevOps/tree/main/CICD/Video_Resources)
+- [Blog resource](https://github.com/Suraj-kumar00/DevOps/tree/main/CICD/Blog_Resources)
 
 <br>
 
 ## Infrastructure as code
 
 - [Notion Notes]()
-- [Video Courses]()
-- [Blog resource]()
+- [Video Courses](https://github.com/Suraj-kumar00/DevOps/tree/main/Infrastructure_as_code/Video_Resources)
+- [Blog resource](https://github.com/Suraj-kumar00/DevOps/tree/main/Infrastructure_as_code/Blog_Resources)
 
 <br>
 
