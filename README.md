@@ -13,8 +13,8 @@
 ## Understanding DevOps
 
 - [Notion Notes]()
-- [Video Courses](https://www.youtube.com/watch?v=0yWAtQ6wYNM&pp=ygUOd2hhdCBpcyBkZXZvcHM%3D)
-- [Blog resource]()
+- [Video Courses](https://github.com/Suraj-kumar00/DevOps/tree/main/Understanding_DevOps/Video_Resources)
+- [Blog resource](https://github.com/Suraj-kumar00/DevOps/tree/main/Understanding_DevOps/Blog_Resources)
 
 <br>
 
