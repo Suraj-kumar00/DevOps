@@ -78,7 +78,7 @@
 ## Cloud platforms
 
 #### For AWS(Amazon Web Services)
-- [Notion Notes]()
+- [Notion Notes](https://www.notion.so/surajkumar00/Learning-AWS-7399a5eaa9674b44932ee52374110629)
 - [Video Courses](https://github.com/Suraj-kumar00/DevOps/tree/main/Cloud_platforms/AWS/Video_Resources)
 - [Blog resource](https://github.com/Suraj-kumar00/DevOps/tree/main/Cloud_platforms/AWS/Blog_Resources)
 
