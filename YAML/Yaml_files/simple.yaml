@@ -1,0 +1,28 @@
+# This is a simple YAML configuration file for deploying a web application
+
+version: '1.0'  # Specifies the version of the configuration format
+
+services:  # Defines the services that make up the application
+  web:  # Defines the web service
+    image: nginx:latest  # Uses the latest nginx image
+    ports:  # Defines port mappings
+      - "80:80"  # Maps port 80 on the host to port 80 in the container
+    volumes:  # Defines volume mappings
+      - ./html:/usr/share/nginx/html  # Mounts local ./html directory to /usr/share/nginx/html in the container
+    environment:  # Defines environment variables
+      - NGINX_HOST=localhost  # Sets NGINX_HOST environment variable to localhost
+      - NGINX_PORT=80  # Sets NGINX_PORT environment variable to 80
+
+  database:  # Defines the database service
+    image: mysql:5.7  # Uses the MySQL 5.7 image
+    ports:  # Defines port mappings
+      - "3306:3306"  # Maps port 3306 on the host to port 3306 in the container
+    environment:  # Defines environment variables
+      MYSQL_ROOT_PASSWORD: example  # Sets MySQL root password to 'example'
+      MYSQL_DATABASE: mydb  # Creates a database named 'mydb'
+      MYSQL_USER: user  # Creates a MySQL user named 'user'
+      MYSQL_PASSWORD: password  # Sets the password for the MySQL user to 'password'
+
+networks:  # Defines network configuration
+  default:  # Uses the default network
+    driver: bridge  # Uses the bridge network driver
