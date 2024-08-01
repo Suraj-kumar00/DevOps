@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:13 # pull form hub.docker.com
+    container_name: postgres
+    environment: # setting up environment variables
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports: # expose and run on port 5432
+      - "5432:5432"
+
+
+  redis:
+    image: redis:6.0.9
+    container_name: redis
+    ports:
+      - "6379:6379"
