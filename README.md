@@ -73,6 +73,8 @@
 
 ## YAML
 
+<img align="right" src="./static/Assets/DevOps-logos/yaml.png" height="100" alt="">
+
 <img align="right" src="./static/Assets/DevOps-logos" height="100" alt="">
 
 - [Notion Notes](https://surajkumar00.notion.site/YAML-YAML-Ain-t-Markup-Language-356715dae3fa432a8af713cf38e9fbdd?pvs=4)
@@ -141,6 +143,10 @@
 <br>
 
 ## Infrastructure as code
+
+#### Terraform
+
+<img align="right" src="./static/Assets/DevOps-logos/Terraform.png" height="100" alt="">
 
 - [Notion Notes](https://surajkumar00.notion.site/Infrastructure-as-code-81a1e5e6f9e442e4bf8799151dec35c2?pvs=4)
 - [Video Courses](https://github.com/Suraj-kumar00/DevOps/tree/main/Infrastructure_as_code/Video_Resources)
