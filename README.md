@@ -6,7 +6,7 @@
 
 ## Complete Blog Documentation:
 
-### [DevOps Blog](https://surajk00.hashnode.dev/series/devops-practices)
+### [DevOps Blog Series](https://surajk00.hashnode.dev/series/devops-practices)
 
 ---
 
