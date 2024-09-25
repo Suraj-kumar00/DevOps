@@ -7,6 +7,12 @@ description: Understanding DevOps
 
 # DevOps
 
-> Hey there, My name is Suraj and I'm documenting my Cloud/DevOps learning journely here.
+> DevOps is the union of people, **process**, and **products** to enable continuous delivery of value to your **end users**.
+>
+> **- Donovan Brown**
+
+>
+
+Hey there, My name is Suraj and I'm documenting my Cloud/DevOps learning journely here.
 
 ## Understanding DevOps
