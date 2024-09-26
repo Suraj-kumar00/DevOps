@@ -155,5 +155,4 @@
 <br>
 
 ## DevOps Projects
-
-- To be listed...
+1. [DevOps URL to QR code Generator](https://github.com/Suraj-kumar00/DevOps-URL2QR)
