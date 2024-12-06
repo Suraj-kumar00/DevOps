@@ -6,7 +6,6 @@ import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import Heading from "@theme/Heading";
 
 import styles from "./index.module.css";
-import Footer from "@theme/Footer";
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -18,10 +17,7 @@ function HomepageHeader() {
         </Heading>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro"
-          >
+          <Link className="button button--secondary button--lg" to="/intro">
             Start Learning
           </Link>
         </div>
