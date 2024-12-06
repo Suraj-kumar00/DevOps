@@ -112,7 +112,7 @@ const config = {
             },
             {
               label: "GitHub",
-              href: "https://github.com/Suraj-kumar00/DevOps",
+              href: "https://github.com/Suraj-kumar00",
             },
           ],
         },
