@@ -236,7 +236,7 @@ docker stats <container_name/id>
 
 ---
 
-### Cleanup Commands
+## Cleanup Commands
 
 **Removes unused containers, networks, images, and build cache.**
 
