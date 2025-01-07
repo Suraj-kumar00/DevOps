@@ -1,0 +1,21 @@
+{
+  "title": "Name of Folder",
+  "pages": [
+    "DevOpsRoadMap2025",
+    "Linux",
+    "ComputerNetworks",
+    "BashScripting",
+    "GitandGitHub",
+    "BuildTools",
+    "PythonForDevOps",
+    "CloudPlatforms",
+    "YAML",
+    "Docker",
+    "Kubernetes",
+    "CICD",
+    "NGINX",
+    "IaC",
+    "ObservabilityandMonitoring",
+    "DevOpsProjects"
+  ]
+}
