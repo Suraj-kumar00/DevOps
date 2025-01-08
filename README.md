@@ -12,11 +12,6 @@
 
 
 ---
-
-## DevOps Roadmap 2025
-
----
-
 ## Understanding DevOps
 
 <img align="right" src="public/Assets/DevOps-logos/DevOps.png" height="100" alt="">
