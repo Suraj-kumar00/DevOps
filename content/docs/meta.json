@@ -7,7 +7,7 @@
     "BashScripting",
     "GitandGitHub",
     "BuildTools",
-    "PythonForDevOps",
+    "Programming",
     "CloudPlatforms",
     "YAML",
     "Docker",
@@ -16,6 +16,10 @@
     "NGINX",
     "IaC",
     "ObservabilityandMonitoring",
+    "GitOps",
+    "ArgoCD",
+    "Helm",
+    "WebAssembaly",
     "DevSecOps",
     "DevOpsProjects"
   ]
