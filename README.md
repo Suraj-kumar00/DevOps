@@ -1,4 +1,4 @@
-![DevOps poster](public/Assets/DevOps_poster.png)
+![DevOps poster](public/Assets/DevOps_README_Banner.png)
 
 <h3 align= "center"> Documenting my all learning and resources of DevOps </h3>
 
@@ -7,11 +7,13 @@
 ## Complete Blog Documentation:
 
 ### [DevOps Blog Series](https://surajk00.hashnode.dev/series/devops-practices)
+
 ---
+
 ## DevOps Roadmap 2025
 
-
 ---
+
 ## Understanding DevOps
 
 <img align="right" src="public/Assets/DevOps-logos/DevOps.png" height="100" alt="">
