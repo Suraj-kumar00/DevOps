@@ -29,6 +29,9 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@mdx-js/loader": "^3.1.0",
+    "@mdx-js/react": "^3.1.0",
+    "@next/mdx": "^15.4.0-canary.51",
     "@types/mdx": "^2.0.13",
     "@types/node": "22.10.5",
     "@types/react": "^19.0.2",

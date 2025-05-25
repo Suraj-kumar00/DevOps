@@ -30,3 +30,4 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/devops:${{ env.TAG }}
             ${{ secrets.DOCKERHUB_USERNAME }}/devops:${{ env.SHA_TAG }}
+
