@@ -10,8 +10,12 @@
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.1",
+    "@radix-ui/react-toast": "^1.2.14",
+    "@sendgrid/mail": "^8.1.5",
+    "@types/date-fns": "^2.5.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "framer-motion": "^11.16.0",
     "fumadocs-core": "14.7.0",
     "fumadocs-mdx": "11.2.2",
@@ -35,5 +39,21 @@
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.2"
-  }
+  },
+  "description": "![DevOps poster](public/Assets/DevOps_README_Banner.png)",
+  "main": "postcss.config.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Suraj-kumar00/DevOps.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Suraj-kumar00/DevOps/issues"
+  },
+  "homepage": "https://github.com/Suraj-kumar00/DevOps#readme"
 }

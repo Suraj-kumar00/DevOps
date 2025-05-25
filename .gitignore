@@ -6,6 +6,10 @@
 .content-collections
 .source
 
+# include environment variables
+.env
+
+
 # test & build
 /coverage
 /.next/

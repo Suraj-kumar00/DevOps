@@ -19,8 +19,9 @@ export const baseOptions: BaseLayoutProps = {
       active: "nested-url",
     },
     {
-      text: "Blog",
-      url: "https://blog.devsuraj.me",
+      text: "Blogs",
+      url: "/blogs",
+      active: "nested-url",
     },
     {
       text: "GitHub",
