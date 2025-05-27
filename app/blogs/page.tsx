@@ -68,11 +68,17 @@ async function getBlogs(page: number = 1): Promise<BlogResponse> {
   return data;
 }
 
-export default async function BlogsPage({
-  searchParams,
-}: {
-  searchParams?: { [key: string]: string | undefined };
-}) {
+interface SearchParamsType {
+  [key: string]: string | string[] | undefined;
+  page?: string;
+}
+
+interface PageProps {
+  searchParams?: Promise<SearchParamsType>;
+}
+
+export default async function BlogsPage(props: PageProps) {
+  const searchParams = (await (props.searchParams || Promise.resolve<SearchParamsType>({ page: "1" })));
   const currentPage = Number(searchParams?.page) || 1;
   const data = await getBlogs(currentPage);
   const blogs = data?.data?.user?.posts?.edges || [];
