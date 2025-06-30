@@ -1,0 +1,21 @@
+documentation:
+  - content/**/*
+  - '**/*.md'
+  
+infrastructure:
+  - Dockerfile
+  - '*.config.*'
+  - '.github/**/*'
+
+frontend:
+  - app/**/*
+  - components/**/*
+  - public/**/*
+
+CI/CD:
+  - .github/workflows/**/*
+
+dependencies:
+  - package.json
+  - yarn.lock
+  - '**/*package*.json'
