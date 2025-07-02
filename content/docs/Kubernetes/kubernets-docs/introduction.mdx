@@ -1,8 +1,126 @@
 ---
-title: Introduction
-description: Introduction to Kubernetes
+title: Introduction to Kubernetes
+description: Learn the fundamentals of Kubernetes, why it was created, how it's different from Docker, its core purpose, and the role of YAML in K8s.
 ---
 
-# Introduction to Kubernets
+# Introduction to Kubernetes
 
-Kubernetes is an open-source container orchestration system for automating the deployment, scaling, and management of containerized application.
+Kubernetes (also known as K8s) is an open-source container orchestration platform that automates the deployment, scaling, and management of containerized applications.
+
+**Developed by:** Google  
+**Donated to:** Cloud Native Computing Foundation (CNCF) in 2015  
+**Written in:** Go (Golang)
+
+## Why Was Kubernetes Created?
+
+Before Kubernetes, managing containers manually was difficult, especially in large-scale production systems. Containers would run, but features like auto-recovery, scaling, and service discovery were missing.
+
+Kubernetes was created to solve the following problems:
+
+- Manual container deployment was slow and error-prone
+- No built-in fault tolerance or self-healing
+- Scaling containers across servers was complex
+- Rolling updates required manual work
+- Service discovery and load balancing were hard to manage
+
+Kubernetes solves these by:
+
+- Automatically scheduling containers across nodes
+- Handling failures (self-healing, restarts)
+- Managing scaling, updates, and desired state
+- Enabling declarative infrastructure through YAML
+
+## Why Use Kubernetes Instead of Just Docker?
+
+Docker is great for building and running containers, but it lacks orchestration features. Kubernetes builds on Docker by managing container lifecycle at scale.
+
+| Feature                              | Docker     | Kubernetes |
+| ------------------------------------ | ---------- | ---------- |
+| Container creation                   | ✅         | ✅         |
+| Networking between containers        | 🟡 Limited | ✅         |
+| Auto-scaling                         | ❌         | ✅         |
+| Load balancing                       | ❌         | ✅         |
+| Self-healing                         | ❌         | ✅         |
+| Rolling updates                      | ❌         | ✅         |
+| Orchestration (multi-container apps) | ❌         | ✅         |
+| Declarative YAML config              | ❌         | ✅         |
+
+## Conclusion
+
+Docker sirf ek chhota part hai (container runtime). Kubernetes us container ko manage karta hai — production-ready orchestration system.
+
+## Disadvantages of Kubernetes
+
+- **Complexity:** Learning curve is steep, especially for beginners.
+- **Resource Intensive:** Needs more system resources (not ideal for small projects).
+- **Setup Time:** Initial setup (especially on-premise) can be time-consuming.
+- **Overhead:** For small apps, it can feel like overkill.
+- **Debugging:** Troubleshooting issues in pods, networking, and volumes can be difficult.
+
+## What is YAML?
+
+YAML stands for “YAML Ain’t Markup Language”. It is a human-readable, declarative data format mainly used for configuration.
+
+In Kubernetes, we use YAML to define:
+
+- Pods
+- Deployments
+- Services
+- ConfigMaps
+- Secrets
+- Ingress, and more…
+
+YAML lets you declare the desired state of resources. Kubernetes then tries to make that state real.
+
+## Why YAML is Used in Kubernetes?
+
+- ✅ **Human-readable:** Easy to read and write
+- ✅ **Declarative:** You describe what you want, not how
+- ✅ **Widely adopted:** Supported by Kubernetes, Ansible, Docker Compose, etc.
+- ✅ **Version-controlled:** Easy to use in Git repositories
+- ✅ **Portable:** Works across environments (local, staging, prod)
+
+## Basic YAML Syntax Rules
+
+- **Indentation:** Always use spaces, not tabs. Usually 2 spaces.
+- **Case-sensitive:** Name ≠ name. Stick to lowercase keys.
+- **Key-value pairs:** Use key: value format
+- **Lists:** Use - (dash) followed by a space for list items
+- **String quoting:** Wrap special characters (@, #, etc.) in quotes
+- **Start of a YAML doc:** Use --- (3 dashes) to indicate start of YAML file
+
+## Example of a Simple YAML (Kubernetes Pod)
+
+```yaml
+---
+apiVersion: v1 # API version used for the resource type (v1 for core objects like Pod)
+kind: Pod # Type of Kubernetes object you're creating (here, it's a Pod)
+metadata: # Metadata contains data like the name of the resource
+  name: my-first-pod # Name of the pod (must be unique within the namespace)
+spec: # Specification of the pod — this defines what the pod will do
+  containers: # A list (array) of containers that will run inside this pod
+    - name: my-container # Name of the container (your custom name)
+      image: nginx:latest # Docker image to be used for the container (from Docker Hub)
+      ports: # Ports that this container will expose
+        - containerPort: 80 # The port number the container listens on (like HTTP on port 80)
+```
+
+## Tips
+
+- Use **YAML Lint** to check for syntax errors.
+- Always validate with `kubectl apply -f file.yaml --dry-run=client`.
+- Keep your indentation consistent (2 spaces recommended).
+- Avoid trailing spaces or tabs — they break the file silently.
+
+## Suggested Learning Resources
+
+- 🧪 **Experiment Hands-On:** Platforms like **Killercoda** and **KodeKloud** offer interactive Kubernetes labs.
+
+- 🎥 **Watch Community Creators:** Check out YouTube channels like:
+
+  - **Prerit Munjal**
+  - **Kubesimplify**
+  - **TrainWithShubham**
+  - **Abhishek.Veeramalla**
+
+- 📘 **Refer to Official Documentation:** Regularly visit [kubernetes.io/docs](https://kubernetes.io/docs) for authoritative content.
