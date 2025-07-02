@@ -1,9 +1,12 @@
 [
   
 {
-  "title": "introduction"
+  "title": "introduction",
+  "position": 1
+
 },
 {
-  "title": "architecture"
+  "title": "architecture",
+  "position": 2
 }
 ]
