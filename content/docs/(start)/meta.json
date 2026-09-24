@@ -1,0 +1,7 @@
+{
+  "title": "Start here",
+  "description": "How this handbook works",
+  "icon": "Compass",
+  "root": true,
+  "pages": ["index", "learning-paths", "page-template", "contributing"]
+}

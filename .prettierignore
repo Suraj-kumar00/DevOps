@@ -1,0 +1,20 @@
+# build output and dependencies
+.next
+.source
+node_modules
+coverage
+package-lock.json
+
+# MDX content is reviewed by humans and validated at build time;
+# Prettier's MDX support lags behind MDX 3 and can rewrite JSX in content.
+content
+
+# third-party legal texts must stay verbatim
+LICENSE
+LICENSE-CONTENT
+CODE_OF_CONDUCT.md
+
+public
+
+# local files written by the Claude desktop app
+Claude outputs

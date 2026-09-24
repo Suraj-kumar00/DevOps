@@ -1,0 +1,17 @@
+# Keep the build context small and free of local state and secrets.
+.git
+.github
+.next
+.source
+node_modules
+coverage
+npm-debug.log*
+.env
+.env*.local
+.vercel
+.DS_Store
+Dockerfile
+.dockerignore
+*.md
+!content/**/*.md
+Claude outputs

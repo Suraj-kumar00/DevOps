@@ -1,0 +1,7 @@
+{
+  "title": "DevSecOps",
+  "description": "Supply chain security, policy as code, runtime security and secrets.",
+  "icon": "ShieldCheck",
+  "root": true,
+  "pages": ["index", "..."]
+}

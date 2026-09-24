@@ -1,0 +1,58 @@
+name: 📚 New topic
+description: Propose a page, or claim one from a track's roadmap before writing it.
+title: '[Topic] '
+labels: ['content', 'new-topic']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping the handbook grow. Opening this issue before you write avoids two people writing the same page.
+        Pages follow the six-layer template described in "How pages are built" (`content/docs/(start)/page-template.mdx`).
+
+  - type: dropdown
+    id: track
+    attributes:
+      label: Track
+      options:
+        - AI Infrastructure
+        - LLMOps
+        - MLOps
+        - DevOps
+        - DevSecOps
+        - Foundations
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: What the page covers
+      description: One or two sentences, and who it is for.
+    validations:
+      required: true
+
+  - type: textarea
+    id: sources
+    attributes:
+      label: Official documentation
+      description: Links to the official docs the page will be based on.
+      placeholder: https://kubernetes.io/docs/...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: writing
+    attributes:
+      label: Will you write it?
+      options:
+        - Yes, assign it to me
+        - I can help, but not write it all
+        - No, just suggesting it
+    validations:
+      required: true
+
+  - type: textarea
+    id: production
+    attributes:
+      label: Production experience (optional)
+      description: Have you run this in production? Failure modes and trade-offs you hit are the most valuable part of a page.

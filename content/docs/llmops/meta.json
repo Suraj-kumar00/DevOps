@@ -1,0 +1,7 @@
+{
+  "title": "LLMOps",
+  "description": "Serving, evaluating, observing and controlling the cost of LLM applications.",
+  "icon": "MessageSquareCode",
+  "root": true,
+  "pages": ["index", "..."]
+}

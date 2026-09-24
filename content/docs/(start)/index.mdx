@@ -1,0 +1,56 @@
+---
+title: Start here
+description: What this handbook covers, how its pages are built, and where to begin.
+kind: guide
+---
+
+The DevOps Learning Hub is a free, open-source handbook for the tools and practices engineers use to build, ship and run software. Its focus is **AI infrastructure on Kubernetes**, with DevOps, DevSecOps and MLOps covered as the ground it stands on.
+
+It is written for three kinds of readers:
+
+- **Beginners** who want a clear path instead of a pile of tutorials.
+- **Working engineers** who need a quick, trustworthy refresher or the production details the official docs leave out.
+- **Engineers moving into AI infrastructure** who already know Kubernetes and want to run GPU and LLM workloads on it.
+
+## Tracks
+
+Pick a track, or follow one of the [learning paths](/docs/learning-paths).
+
+<Cards>
+  <Card title="AI Infrastructure" href="/docs/ai-infra">
+    GPUs, scheduling, model serving and observability for AI workloads on Kubernetes. The flagship track.
+  </Card>
+  <Card title="LLMOps" href="/docs/llmops">
+    Serving, evaluating, observing and controlling the cost of LLM applications.
+  </Card>
+  <Card title="MLOps" href="/docs/mlops">
+    Pipelines, experiment tracking, model registries and monitoring.
+  </Card>
+  <Card title="DevOps" href="/docs/devops">
+    Containers, Kubernetes, CI/CD, infrastructure as code and observability.
+  </Card>
+  <Card title="DevSecOps" href="/docs/devsecops">
+    Supply chain security, policy as code, runtime security and secrets.
+  </Card>
+  <Card title="Foundations" href="/docs/foundations">
+    Linux, networking, Git, shell scripting and the other basics.
+  </Card>
+</Cards>
+
+## How every page is built
+
+Every topic page follows the same six layers, from beginner to senior: what and why, how it works, a hands-on example, production notes, interview scenarios, and sources. You can stop reading at the layer that matches what you need today and come back for the rest later. The [page template](/docs/page-template) explains each layer.
+
+## Ground rules
+
+- **Official docs first.** Definitions, flags and defaults come from each project's own documentation, and every topic page links to it.
+- **Verified and dated.** Topic pages record the version their examples were tested with and the date they were last checked. Pages older than six months show a warning.
+- **Credit, never copy.** When someone else explained something well, we link to it and name the author instead of rewriting their work.
+
+## Where things stand
+
+The handbook is being rebuilt in the open. Each track page shows what is published and what is on the roadmap, so you always know what exists. If you want a topic sooner, you can [help write it](/docs/contributing).
+
+## Use it with AI tools
+
+Every page is also available as Markdown: add `.md` to the URL or use the **Copy Markdown** button at the top of a page. An index of all pages lives at [`/llms.txt`](/llms.txt), and an MCP server at `/api/mcp` lets assistants such as Claude or Cursor search and read the handbook directly.

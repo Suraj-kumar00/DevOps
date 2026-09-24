@@ -1,0 +1,184 @@
+---
+title: How pages are built
+description: The six-layer template every topic page follows, the frontmatter the build checks, and the components you can use.
+kind: guide
+---
+
+Every topic page (a tool or a concept) follows the same structure. A beginner can stop after the first two layers, a working engineer can jump to the hands-on example and production notes, and anyone preparing for an interview can go straight to the scenarios. Because every page looks the same, readers always know where to find what they need.
+
+## The six layers
+
+Use these exact `##` headings, in this order.
+
+| # | Heading | What goes in it | Written for |
+| - | ------- | --------------- | ----------- |
+| 1 | What and why | A plain-language definition based on the official docs, and the problem the tool solves. | <LevelBadge level="beginner" /> |
+| 2 | How it works | Architecture and core concepts, with a diagram drawn for this site. | <LevelBadge level="intermediate" /> |
+| 3 | Hands-on | A minimal example you actually ran, pinned to the version in `toolVersion`. | <LevelBadge level="intermediate" /> |
+| 4 | Production notes | Failure modes, trade-offs, security, observability and cost. | <LevelBadge level="advanced" /> |
+| 5 | Interview scenarios | Scenario-based questions with model answers, tagged by level. | <LevelBadge level="all" /> |
+| 6 | Sources and credits | Generated from the `sources` frontmatter. Do not write this heading yourself. | <LevelBadge level="all" /> |
+
+## Frontmatter
+
+Topic pages start with frontmatter like this:
+
+```yaml title="content/docs/devops/kubernetes-probes.mdx"
+---
+title: Liveness, readiness and startup probes
+description: How Kubernetes decides whether to restart a container or send it traffic.
+level: intermediate
+toolVersion: Kubernetes 1.34
+lastVerified: 2026-09-22
+prerequisites:
+  - /docs/devops
+sources:
+  - title: Liveness, Readiness, and Startup Probes
+    url: https://kubernetes.io/docs/concepts/workloads/pods/probes/
+  - title: Configure Liveness, Readiness and Startup Probes
+    url: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+---
+```
+
+| Field | Required on topic pages | Notes |
+| ----- | ----------------------- | ----- |
+| `title` | Yes | Sentence case. |
+| `description` | Recommended | One sentence. Shown under the title, in search results and in link previews. |
+| `level` | Yes | `beginner`, `intermediate` or `advanced`: the minimum level a reader needs to get value from the page. |
+| `toolVersion` | Yes | The version your examples were tested with, for example `Kubernetes 1.34`. |
+| `lastVerified` | Yes | `YYYY-MM-DD`, the day you checked the page against the official docs. |
+| `sources` | Yes | At least one `official` source. Each needs `title` and an `https` URL. Set `type` to `community`, `talk`, `paper` or `book` for other sources, and add `author` so we credit them. |
+| `prerequisites` | No | URLs of pages to read first. They must exist, or the build fails. |
+| `kind` | No | Defaults to `topic`. Track overviews use `track`, site guides use `guide`. |
+
+### What the build checks
+
+The frontmatter is validated when the site builds, so a page that breaks the contract never reaches readers. The build fails when:
+
+- a topic page is missing `level`, `toolVersion`, `lastVerified` or an official source;
+- a source URL is not `https`, or a non-official source has no `author`;
+- `lastVerified` is not a real `YYYY-MM-DD` date;
+- a prerequisite points to a page that does not exist.
+
+Pages whose `lastVerified` date is more than 180 days old get an "outdated" warning at the top automatically.
+
+## Components
+
+These components are available in every page without importing them.
+
+### Production notes
+
+Use `<ProductionNote>` for lessons that only show up in production.
+
+<ProductionNote title="liveness probes that check dependencies">
+  The kubelet restarts a container when its liveness probe fails. If that probe also checks a database, an outage of the database restarts every replica, and restarting cannot fix it. The Kubernetes docs warn that incorrect liveness probes can lead to cascading failures. Put dependency checks in the readiness probe instead, which only stops traffic to the Pod.
+</ProductionNote>
+
+```mdx
+<ProductionNote title="liveness probes that check dependencies">
+  The kubelet restarts a container when its liveness probe fails. ...
+</ProductionNote>
+```
+
+### Interview scenarios
+
+Wrap scenarios in `<Scenarios>`. Answers stay collapsed so readers can think first.
+
+<Scenarios>
+  <Scenario level="intermediate" question="Pods restart every few minutes under load. The liveness probe fails, but the application logs look healthy. What do you check first?">
+    Start with the probe configuration. `timeoutSeconds` defaults to 1 second, so an endpoint that slows down under load can fail the probe while the application still works. The kubelet then restarts a Pod that was only busy, which pushes more load onto the remaining Pods. Compare the probe's timeout, period and failure threshold with real response times, make sure the endpoint does not call other services, and use a startup probe for slow starts instead of a long initial delay.
+  </Scenario>
+</Scenarios>
+
+```mdx
+<Scenarios>
+  <Scenario level="intermediate" question="Pods restart every few minutes under load...">
+    Start with the probe configuration. ...
+  </Scenario>
+</Scenarios>
+```
+
+### Diagrams
+
+Draw diagrams with Mermaid so they stay editable in pull requests and follow the reader's theme. Never paste a diagram copied from somewhere else. Give each diagram a `title`, which screen readers announce.
+
+<Mermaid
+  title="How a contribution gets published"
+  chart="flowchart LR
+  A[Open an issue] --> B[Write the page]
+  B --> C[Open a pull request]
+  C --> D{CI checks}
+  D -- fail --> B
+  D -- pass --> E[Review]
+  E --> F[Published]"
+/>
+
+```mdx
+<Mermaid
+  title="How a contribution gets published"
+  chart="flowchart LR
+  A[Open an issue] --> B[Write the page]
+  ..."
+/>
+```
+
+### Tabs, steps and callouts
+
+`<Tabs>` and `<Tab>` are for the same task done different ways (for example `kubectl` versus Helm). `<Steps>` and `<Step>` are for ordered procedures. `<Callout>` is for short notes and warnings.
+
+<Tabs items={['kubectl', 'Helm']}>
+  <Tab value="kubectl">Apply the manifest with `kubectl apply -f`.</Tab>
+  <Tab value="Helm">Install the chart with `helm install`.</Tab>
+</Tabs>
+
+<Callout type="warn" title="Pin versions in examples">
+  Use exact image tags and chart versions in examples, never `latest`, so the example still works when someone reads it next year.
+</Callout>
+
+## Sources and credits
+
+- Link the official documentation for every fact you state, and put it in `sources`.
+- When a community post, talk or paper helped, add it with `author` so it is credited on the page.
+- Quote at most a sentence or two, with attribution. Explain the rest in your own words.
+- Do not copy images or diagrams. Redraw them with Mermaid and credit the original in `sources`.
+
+## Writing style
+
+- Write for someone smart who is new to the topic. Define each acronym the first time you use it.
+- Keep sentences short. Use active voice and the present tense.
+- Use the project's own terms and capitalization, such as Pod, Deployment or Helm chart.
+- Only include commands and manifests you have run, on the version in `toolVersion`.
+- Skip marketing language. Any claim about performance or cost needs a source.
+
+## Page skeleton
+
+Copy this to start a new topic page.
+
+```mdx title="content/docs/<track>/<topic>.mdx"
+---
+title: Topic name
+description: One sentence on what the reader will learn.
+level: beginner
+toolVersion: Tool 1.0
+lastVerified: 2026-01-31
+sources:
+  - title: Official documentation page
+    url: https://example.com/docs
+---
+
+## What and why
+
+## How it works
+
+## Hands-on
+
+## Production notes
+
+## Interview scenarios
+
+<Scenarios>
+  <Scenario level="beginner" question="...">
+    ...
+  </Scenario>
+</Scenarios>
+```

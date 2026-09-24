@@ -1,43 +1,28 @@
----
-name: Pull Request
-about: Create a pull request to help us improve
----
+## What this changes
 
-## Description
-<!-- Provide a brief description of the changes in this PR -->
+<!-- One or two sentences. Link the issue it resolves, e.g. "Closes #12". -->
 
-## Related Issue
-<!-- Link to the issue that this PR addresses using #issue-number -->
-Fixes #
+## Type of change
 
-## Type of Change
-<!-- Put an `x` in all the boxes that apply -->
-- [ ] 📝 Documentation update
-- [ ] 🐛 Bug fix
-- [ ] ✨ New feature
-- [ ] 🎨 Style update
-- [ ] ♻️ Code refactor
-- [ ] 🚀 Performance improvement
-- [ ] ✅ Test update
-- [ ] 🔨 Infrastructure update
+- [ ] New page
+- [ ] Content fix or update
+- [ ] Site feature or bug fix
+- [ ] Tooling, CI or dependencies
 
-## Changes Made
-<!-- Describe the changes you've made in detail -->
-1. 
-2. 
-3. 
+## Checklist for content changes
 
-## Checklist
-<!-- Put an `x` in all the boxes that apply -->
-- [ ] I have read the [CONTRIBUTING](../CONTRIBUTING.md) document
-- [ ] My code follows the code style of this project
-- [ ] I have updated the documentation accordingly
-- [ ] I have added tests that prove my fix is effective or that my feature works
-- [ ] New and existing tests pass locally
-- [ ] My changes generate no new warnings
+- [ ] The page follows the six-layer template (see "How pages are built").
+- [ ] Every fact is backed by a source in the frontmatter, with at least one official source.
+- [ ] I ran every command and manifest on the version in `toolVersion`, and updated `lastVerified`.
+- [ ] Other people's work is linked and credited by name, not copied.
+- [ ] Diagrams are drawn with Mermaid and have a `title`.
 
-## Screenshots (if applicable)
-<!-- Add screenshots to help explain your changes -->
+## Checklist for code changes
 
-## Additional Notes
-<!-- Add any additional notes or context about the PR here -->
+- [ ] `npm run check` passes (lint, types, formatting, tests).
+- [ ] `npm run build` passes.
+- [ ] I checked the change in light and dark mode, and on a narrow screen if it touches the UI.
+
+## Screenshots
+
+<!-- For visual changes, before and after. -->

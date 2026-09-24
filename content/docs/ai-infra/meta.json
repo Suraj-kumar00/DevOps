@@ -1,0 +1,7 @@
+{
+  "title": "AI Infrastructure",
+  "description": "GPUs, scheduling, model serving and observability for AI workloads on Kubernetes.",
+  "icon": "Cpu",
+  "root": true,
+  "pages": ["index", "..."]
+}

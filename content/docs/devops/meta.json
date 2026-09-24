@@ -1,0 +1,7 @@
+{
+  "title": "DevOps",
+  "description": "Containers, Kubernetes, CI/CD, infrastructure as code and observability.",
+  "icon": "Workflow",
+  "root": true,
+  "pages": ["index", "..."]
+}

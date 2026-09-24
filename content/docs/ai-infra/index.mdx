@@ -1,0 +1,59 @@
+---
+title: AI Infrastructure
+description: "Run GPU and LLM workloads on Kubernetes: scheduling, sharing, serving, autoscaling and observability."
+kind: track
+flagship: true
+planned:
+  - slug: gpus-for-infra-engineers
+    title: "GPUs for infrastructure engineers"
+    description: "What makes GPU workloads different from CPU services, and what drivers, memory and interconnects mean for a cluster."
+  - slug: gpus-on-kubernetes
+    title: "Running GPUs on Kubernetes"
+    description: "Device plugins, the NVIDIA GPU Operator, and how a Pod requests a GPU."
+  - slug: dynamic-resource-allocation
+    title: "Dynamic Resource Allocation (DRA)"
+    description: "The Kubernetes API for requesting and sharing devices such as GPUs."
+  - slug: gpu-sharing
+    title: "GPU sharing: time-slicing, MIG, MPS and HAMi"
+    description: "The ways to share one GPU between workloads, and their isolation and performance trade-offs."
+  - slug: queueing-with-kueue
+    title: "Queueing AI jobs with Kueue"
+    description: "Quotas, fair sharing and job queueing for training and batch workloads."
+  - slug: model-serving-kserve
+    title: "Model serving with KServe"
+    description: "Serving models on Kubernetes with autoscaling and gradual rollouts."
+  - slug: llm-inference-vllm
+    title: "LLM inference with vLLM"
+    description: "How vLLM serves large language models, and how to run it on Kubernetes."
+  - slug: distributed-inference-llm-d
+    title: "Distributed inference with llm-d"
+    description: "Kubernetes-native distributed LLM inference with llm-d, a CNCF Sandbox project."
+  - slug: inference-gateway
+    title: "Gateway API Inference Extension"
+    description: "Model-aware routing and load balancing for inference traffic."
+  - slug: autoscaling-ai-workloads
+    title: "Autoscaling AI workloads"
+    description: "Scaling GPU-backed services on the metrics that matter, with KEDA and custom metrics."
+  - slug: ray-on-kubernetes
+    title: "Ray on Kubernetes with KubeRay"
+    description: "Running distributed training and serving with Ray on a Kubernetes cluster."
+  - slug: gpu-observability
+    title: "GPU observability"
+    description: "GPU health and utilization metrics with NVIDIA DCGM Exporter, Prometheus and Grafana."
+  - slug: ai-infrastructure-cost
+    title: "The cost of AI infrastructure"
+    description: "Measuring GPU utilization and cost per request, and the levers that reduce waste."
+---
+
+This is the flagship track. It is for engineers who already run services on Kubernetes and now need to run AI workloads on it: training jobs that hold many GPUs for hours, and inference services that must answer quickly without burning money.
+
+## Before you start
+
+You should be comfortable with Pods, Deployments and Services, resource requests and limits, and basic autoscaling. The [DevOps track](/docs/devops) covers these.
+
+## What you will be able to do
+
+- Explain how Kubernetes discovers, allocates and shares GPUs, and pick a sharing strategy for a given workload.
+- Choose a serving stack for traditional models and for large language models.
+- Scale GPU-backed services on meaningful signals, and observe their health and utilization.
+- Explain where the money goes in an AI platform, and how to reduce waste.
