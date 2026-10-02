@@ -15,7 +15,7 @@
     "check": "npm run lint && npm run types:check && npm run format:check && npm run test"
   },
   "dependencies": {
-    "@modelcontextprotocol/server": "2.0.0",
+    "@modelcontextprotocol/server": "2.1.0",
     "cn": "0.2.6",
     "fumadocs-core": "16.15.11",
     "fumadocs-mdx": "15.4.1",
