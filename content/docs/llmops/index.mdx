@@ -1,0 +1,42 @@
+---
+title: LLMOps
+description: Serving, evaluating, observing and controlling the cost of applications built on large language models.
+kind: track
+planned:
+  - slug: what-llmops-adds
+    title: "What LLMOps adds to MLOps"
+    description: "Prompts, evaluation, serving and token costs: what changes when the model is an LLM."
+  - slug: serving-patterns
+    title: "LLM serving patterns"
+    description: "Managed APIs versus self-hosted models, batching, streaming and caching."
+  - slug: evaluation
+    title: "Evaluating LLM applications"
+    description: "Test sets, offline and online evaluation, and catching regressions before users do."
+  - slug: observability-opentelemetry
+    title: "LLM observability with OpenTelemetry"
+    description: "Tracing prompts, token usage and latency with the OpenTelemetry semantic conventions for generative AI."
+  - slug: rag-infrastructure
+    title: "Infrastructure for RAG"
+    description: "Embedding pipelines, vector databases and keeping an index fresh."
+  - slug: ai-gateways
+    title: "AI gateways"
+    description: "Routing, rate limiting and fallbacks across model providers."
+  - slug: guardrails-and-safety
+    title: "Guardrails and safety"
+    description: "Filtering inputs and outputs, handling personal data, and preventing abuse."
+  - slug: tokens-latency-cost
+    title: "Tokens, latency and cost"
+    description: "Measuring cost per request, and the levers that bring it down."
+---
+
+Large language models change the operational picture: requests are expensive and slow compared with a typical API call, outputs are non-deterministic, and quality can regress without any code change. This track covers the practices and tools for running LLM applications in production.
+
+## Before you start
+
+Read the [AI Infrastructure](/docs/ai-infra) track first if you plan to self-host models. If you only call managed model APIs, the DevOps observability basics are enough to begin.
+
+## What you will be able to do
+
+- Choose between managed model APIs and self-hosted models for a given use case.
+- Evaluate an LLM application and catch regressions before release.
+- Trace and measure LLM calls, including tokens, latency and cost.

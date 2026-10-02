@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/Suraj-kumar00/DevOps/security/advisories/new
+    about: Please report security issues privately, never in a public issue.

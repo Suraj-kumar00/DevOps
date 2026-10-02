@@ -1,66 +1,385 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
+
+/*
+ * Color system: cool-tinted neutrals plus one brand gradient, cyan (infrastructure) through blue
+ * to violet (AI). The gradient is used in a few places only: the hero glow, one headline phrase,
+ * primary buttons, the logo mark, the featured track card and the Open Graph images.
+ *
+ * Contrast (WCAG 2.2 AA needs 4.5:1 for body text), checked against background, card and muted:
+ * - light: foreground 17:1 or better, muted text 5.3:1 or better, primary 5.4:1 or better,
+ *   each gradient stop 5.0:1 or better, white on the button gradient 6.1:1 or better.
+ * - dark: foreground 14:1 or better, muted text 6.8:1 or better, primary 6.9:1 or better,
+ *   each gradient stop 7.8:1 or better, dark text on the button gradient 7.8:1 or better.
+ * - level colors: 4.6:1 or better on their own 10% tint, in both modes.
+ */
+@theme {
+  --color-fd-background: #f7f8fa;
+  --color-fd-foreground: #0b0d12;
+  --color-fd-card: #ffffff;
+  --color-fd-card-foreground: #0b0d12;
+  --color-fd-popover: #ffffff;
+  --color-fd-popover-foreground: #0b0d12;
+  --color-fd-muted: #eef0f4;
+  --color-fd-muted-foreground: #5b6271;
+  --color-fd-secondary: #eef0f4;
+  --color-fd-secondary-foreground: #0b0d12;
+  --color-fd-accent: #e6e9ef;
+  --color-fd-accent-foreground: #0b0d12;
+  --color-fd-border: #dde1e8;
+  --color-fd-primary: #2458d3;
+  --color-fd-primary-foreground: #ffffff;
+  --color-fd-ring: #2458d3;
+
+  --color-brand-cyan: #0e7490;
+  --color-brand-blue: #2458d3;
+  --color-brand-violet: #6d28d9;
+
+  --color-level-beginner: #11703f;
+  --color-level-intermediate: #1d4fb8;
+  --color-level-advanced: #6d35c2;
+}
+
+.dark {
+  --color-fd-background: #0b0d12;
+  --color-fd-foreground: #e8ebf1;
+  --color-fd-card: #11141b;
+  --color-fd-card-foreground: #e8ebf1;
+  --color-fd-popover: #12151d;
+  --color-fd-popover-foreground: #e8ebf1;
+  --color-fd-muted: #171b24;
+  --color-fd-muted-foreground: #9ba3b4;
+  --color-fd-secondary: #171b24;
+  --color-fd-secondary-foreground: #e8ebf1;
+  --color-fd-accent: #1c212c;
+  --color-fd-accent-foreground: #e8ebf1;
+  --color-fd-border: #262c38;
+  --color-fd-primary: #7aa2ff;
+  --color-fd-primary-foreground: #0b0d12;
+  --color-fd-ring: #7aa2ff;
+
+  --color-brand-cyan: #67e8f9;
+  --color-brand-blue: #7aa2ff;
+  --color-brand-violet: #c4a7ff;
+
+  --color-level-beginner: #5fd49b;
+  --color-level-intermediate: #8fb3ff;
+  --color-level-advanced: #c7a4ff;
+}
+
+/* The neutral preset tints the docs sidebar with plain grays in dark mode; keep it cool-tinted. */
+.dark #nd-sidebar {
+  --color-fd-muted: #1b2029;
+  --color-fd-secondary: #1e2430;
+  --color-fd-muted-foreground: #a3abbb;
+}
+
+:root {
+  /* How strongly the hero glow shows; dark backgrounds need more to read as color. */
+  --glow-strength: 16%;
+}
+
+.dark {
+  --glow-strength: 24%;
+}
+
+/* Fonts are loaded in app/fonts: Mona Sans for all text, JetBrains Mono for code. */
+@theme inline {
+  --font-sans: var(--font-mona-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem
+  /* Headings use Mona Sans's semi-expanded width (112.5%); body text stays at normal width. */
+  h1,
+  h2,
+  h3 {
+    font-stretch: semi-expanded;
   }
-  .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%
+
+  /* No programming ligatures: readers type what they see, so "!=" must not render as one glyph. */
+  code,
+  kbd,
+  pre,
+  samp {
+    font-variant-ligatures: none;
   }
 }
-@layer base {
-  * {
-    @apply border-border;
+
+html {
+  scrollbar-gutter: stable;
+}
+
+html > body[data-scroll-locked] {
+  margin-right: 0px !important;
+  --removed-body-scroll-bar-size: 0px !important;
+}
+
+::selection {
+  background-color: color-mix(in oklch, var(--color-brand-blue) 28%, transparent);
+}
+
+/* Faint grid used behind the home page hero. */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, var(--color-fd-border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-fd-border) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Soft brand-colored light behind the home page hero. */
+@utility bg-hero-glow {
+  background-image:
+    radial-gradient(
+      42rem 26rem at 8% -12%,
+      color-mix(in oklch, var(--color-brand-cyan) var(--glow-strength), transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      46rem 28rem at 92% -8%,
+      color-mix(in oklch, var(--color-brand-violet) var(--glow-strength), transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      38rem 24rem at 50% -4%,
+      color-mix(in oklch, var(--color-brand-blue) var(--glow-strength), transparent),
+      transparent 70%
+    );
+}
+
+/* The full brand gradient as text color. Every stop passes 4.5:1 on the page background. */
+@utility text-gradient-brand {
+  background-image: linear-gradient(
+    100deg in oklch,
+    var(--color-brand-cyan),
+    var(--color-brand-blue) 50%,
+    var(--color-brand-violet)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Fill for primary buttons and the logo mark: blue to violet, so button text keeps its contrast. */
+@utility bg-gradient-brand {
+  background-image: linear-gradient(
+    120deg in oklch,
+    var(--color-brand-blue),
+    var(--color-brand-violet)
+  );
+}
+
+/* A 1px gradient border on a card, with a faint wash of the same colors inside. */
+@utility card-gradient-brand {
+  border-color: transparent;
+  background:
+    linear-gradient(
+        135deg,
+        color-mix(in oklch, var(--color-brand-cyan) 6%, var(--color-fd-card)),
+        var(--color-fd-card) 45%,
+        color-mix(in oklch, var(--color-brand-violet) 7%, var(--color-fd-card))
+      )
+      padding-box,
+    linear-gradient(
+        120deg in oklch,
+        var(--color-brand-cyan),
+        var(--color-brand-blue),
+        var(--color-brand-violet)
+      )
+      border-box;
+}
+
+/*
+ * Motion for the track icons on the home page cards (components/icons/track-icons.tsx), following
+ * the svg-animations guidance: explicit origins, short paths, continuous loops, and no motion at all
+ * when the reader prefers reduced motion. Elsewhere, such as the docs sidebar, the icons stay still.
+ */
+.icon-fan {
+  transform-box: view-box;
+  transform-origin: 8.5px 11px;
+}
+
+.icon-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* One dash running around the DevOps loop in a single direction; the paths set pathLength="100". */
+.icon-flow {
+  stroke-dasharray: 22 78;
+}
+
+/* Signals moving along the edges of the neural network. */
+.icon-signal {
+  stroke-dasharray: 1.5 4.5;
+}
+
+/* Lines of a reply being written; the paths set pathLength="1". */
+.icon-type {
+  stroke-dasharray: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-icon-motion] .icon-fan {
+    animation: icon-spin 1.6s linear infinite;
   }
-  body {
-    @apply bg-background text-foreground;
+
+  [data-icon-motion] .icon-pulse {
+    animation: icon-pulse 1.6s ease-in-out infinite;
+  }
+
+  [data-icon-motion] .icon-blink {
+    animation: icon-blink 1s linear infinite;
+  }
+
+  [data-icon-motion] .icon-flow {
+    animation: icon-flow 3s linear infinite;
+  }
+
+  [data-icon-motion] .icon-signal {
+    animation: icon-signal 0.9s linear infinite;
+  }
+
+  [data-icon-motion] .icon-type {
+    animation: icon-type 3s ease-in-out infinite;
+  }
+}
+
+@keyframes icon-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes icon-pulse {
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+@keyframes icon-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes icon-flow {
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
+@keyframes icon-signal {
+  to {
+    stroke-dashoffset: -6;
+  }
+}
+
+@keyframes icon-type {
+  0% {
+    stroke-dashoffset: 1;
+  }
+  35%,
+  80% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 1;
+  }
+}
+
+/* Brand logos (components/icons/brand-logos.tsx) set their color for each color mode. */
+.brand-logo {
+  fill: var(--logo-light);
+}
+
+.dark .brand-logo {
+  fill: var(--logo-dark);
+}
+
+/*
+ * Tool marquee on the home page (components/home/tools-marquee.tsx). Each row holds its list
+ * twice and moves by exactly one copy, so the loop has no visible seam. Items space themselves
+ * with a right margin rather than `gap`, which keeps both copies the same width. Each row sets
+ * --marquee-duration from its length, so all rows move at the same speed.
+ */
+.marquee {
+  --marquee-fade: clamp(1.5rem, 8vw, 7rem);
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 var(--marquee-fade),
+    #000 calc(100% - var(--marquee-fade)),
+    transparent
+  );
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--marquee-duration, 60s) linear infinite;
+}
+
+.marquee[data-reverse] .marquee-track {
+  animation-direction: reverse;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    mask-image: none;
+  }
+
+  .marquee-track {
+    width: auto;
+    animation: none;
+    justify-content: center;
+  }
+
+  .marquee-track > ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 0.75rem;
+  }
+
+  .marquee-copy {
+    display: none;
+  }
+}
+
+/*
+ * Cards and section headings fade in as they scroll into view. Scroll-driven animations need no
+ * JavaScript; browsers without them, and readers who prefer reduced motion, just see the content.
+ */
+@supports (animation-timeline: view()) {
+  @media screen and (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
   }
 }

@@ -1,24 +1,32 @@
-name: PR Automation
+name: PR automation
 
+# `pull_request_target` runs in the context of the base repository so it can label PRs from forks.
+# That is only safe because no job here checks out or runs code from the pull request.
 on:
   pull_request_target:
-    types: [opened, synchronize, reopened, ready_for_review]
+    types: [opened, edited, synchronize, reopened, ready_for_review]
+
+permissions: {}
 
 jobs:
-  triage:
+  label:
+    name: Label by changed paths
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
-      - uses: actions/labeler@v4
-        with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          
-  validate:
+      - uses: actions/labeler@bf12e9b00b37c5c0ca2b87b79b2daf7891dbda13 # v7.0.0
+
+  title:
+    name: Conventional PR title
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      pull-requests: read
     steps:
-      - uses: actions/checkout@v3
-      
-      - name: Validate PR Title
-        uses: amannn/action-semantic-pull-request@v5
+      - uses: amannn/action-semantic-pull-request@48f256284bd46cdaab1048c3721360e808335d50 # v6.1.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -26,19 +34,11 @@ jobs:
             feat
             fix
             docs
+            content
             style
             refactor
+            perf
             test
+            build
+            ci
             chore
-          
-      - name: Check if PR references an issue
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const pr = context.payload.pull_request;
-            const body = pr.body;
-            const issueReference = body.match(/(closes|fixes|resolves)\s+#\d+/i);
-            
-            if (!issueReference) {
-              core.setFailed('PR description must reference an issue using "Fixes #issue-number"');
-            }

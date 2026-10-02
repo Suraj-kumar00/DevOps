@@ -1,12 +1,16 @@
-import { DocsLayout } from "fumadocs-ui/layouts/docs";
-import type { ReactNode } from "react";
-import { baseOptions } from "@/app/layout.config";
-import { source } from "@/lib/source";
+import { DocsLayout } from 'fumadocs-ui/layouts/docs';
+import { SkipLink } from '@/components/skip-link';
+import { baseOptions } from '@/lib/layout.shared';
+import { source } from '@/lib/source';
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default function Layout({ children }: LayoutProps<'/docs'>) {
   return (
-    <DocsLayout tree={source.pageTree} {...baseOptions}>
-      {children}
-    </DocsLayout>
+    <>
+      {/* `nd-page` is the <article> Fumadocs renders for every docs page. */}
+      <SkipLink targetId="nd-page" />
+      <DocsLayout tree={source.getPageTree()} {...baseOptions()}>
+        {children}
+      </DocsLayout>
+    </>
   );
 }

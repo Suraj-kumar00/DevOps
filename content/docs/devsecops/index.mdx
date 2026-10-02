@@ -1,0 +1,39 @@
+---
+title: DevSecOps
+description: Security built into delivery, from the software supply chain to running workloads.
+kind: track
+planned:
+  - slug: devsecops-in-practice
+    title: "DevSecOps in practice"
+    description: "Where security fits in each stage of delivery, and who owns it."
+  - slug: supply-chain-security
+    title: "Software supply chain security"
+    description: "SBOMs, signing artifacts with Sigstore, and build provenance with SLSA."
+  - slug: image-scanning
+    title: "Scanning container images"
+    description: "Finding known vulnerabilities in images, and deciding what to fix first."
+  - slug: secrets-management
+    title: "Secrets management"
+    description: "Keeping credentials out of code and images with Vault, External Secrets and cloud key management."
+  - slug: kubernetes-hardening
+    title: "Hardening Kubernetes"
+    description: "RBAC, network policies and Pod Security Standards."
+  - slug: policy-as-code
+    title: "Policy as code"
+    description: "Enforcing cluster rules with Kyverno and OPA Gatekeeper."
+  - slug: runtime-security
+    title: "Runtime security with Falco"
+    description: "Detecting suspicious behavior in running containers."
+---
+
+DevSecOps makes security part of every stage of delivery instead of a gate at the end. This track focuses on the controls that matter most for cloud native systems: what goes into your artifacts, what is allowed to run, and how you notice when something goes wrong.
+
+## Before you start
+
+The containers, Kubernetes and CI/CD pages in the [DevOps track](/docs/devops) are assumed.
+
+## What you will be able to do
+
+- Secure the path from source code to a running container.
+- Enforce cluster policies and keep secrets out of code.
+- Detect suspicious behavior at runtime.

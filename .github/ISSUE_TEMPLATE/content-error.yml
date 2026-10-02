@@ -1,0 +1,34 @@
+name: 📝 Content is wrong or outdated
+description: Report an incorrect statement, a broken example or an outdated page.
+title: '[Content] '
+labels: ['content']
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page URL
+      placeholder: https://.../docs/...
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong or outdated?
+      description: Quote the sentence or paste the command that is wrong.
+    validations:
+      required: true
+
+  - type: textarea
+    id: source
+    attributes:
+      label: Source for the correct information
+      description: A link to the official documentation, release notes or changelog that shows the correct behavior.
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Tool version you checked against
+      placeholder: e.g. Kubernetes 1.34
