@@ -1,0 +1,173 @@
+---
+title: Git essentials
+description: Commits, branches, merges and the branch-and-merge workflow behind every pull request.
+level: beginner
+toolVersion: Git 2.43
+lastVerified: 2026-11-26
+sources:
+  - title: Git documentation
+    url: https://git-scm.com/docs
+  - title: git-branch
+    url: https://git-scm.com/docs/git-branch
+  - title: git-merge
+    url: https://git-scm.com/docs/git-merge
+  - title: Pro Git, Basic Branching and Merging
+    url: https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
+    type: book
+    author: Scott Chacon and Ben Straub
+---
+
+## What and why
+
+Git records the history of a project as a series of snapshots called **commits**. It lets many people work on the same code at once, go back to any earlier state and review changes before they are accepted.
+
+For a DevOps engineer, Git is more than a way to save code. Pipelines start from a commit, infrastructure definitions live in repositories, and tools such as Argo CD deploy whatever is in a Git branch. Your public GitHub profile is also the portfolio that [the 90-day path](/docs/90-day-path) asks you to build.
+
+## How it works
+
+A commit points to the commit before it. A **branch** is a movable name for one commit, so creating a branch is cheap. The usual workflow gives every change its own branch, then merges it back into `main` after review. A pull request on GitHub is a request to do that merge, with a place for discussion.
+
+<Mermaid
+  title="The branch and merge workflow"
+  chart="flowchart LR
+  A[main] --> B[Create a branch]
+  B --> C[Commit your change]
+  C --> D[Push the branch]
+  D --> E[Open a pull request]
+  E --> F[Review and merge into main]"
+/>
+
+## Hands-on
+
+This exercise was run with Git 2.43. A second repository on your own disk plays the part of GitHub, so you can practise pushing without an account.
+
+<Steps>
+<Step>
+
+### Create a shared "remote" and a working copy
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+git init --bare -b main remote.git
+git clone remote.git work
+cd work
+```
+
+Cloning an empty repository prints a warning that you appear to have cloned an empty repository. That is expected here.
+
+</Step>
+<Step>
+
+### Make the first commit and publish it
+
+```bash
+git switch -c main
+echo "# demo" > README.md
+git add README.md
+git commit -m "Add README"
+git push -u origin main
+```
+
+`git add` chooses what goes into the next commit. `git commit` records it. `git push -u origin main` sends it to the remote and remembers that `main` tracks `origin/main`.
+
+</Step>
+<Step>
+
+### Do your work on a branch
+
+```bash
+git switch -c add-health-script
+printf '#!/usr/bin/env bash\ndf -h /\n' > health.sh
+git add health.sh
+git commit -m "Add health script"
+git push -u origin add-health-script
+```
+
+On GitHub, the pushed branch is what you would open a pull request from.
+
+</Step>
+<Step>
+
+### Merge it and read the history
+
+```bash
+git switch main
+git merge --no-ff add-health-script -m "Merge add-health-script"
+git log --oneline --graph --decorate
+```
+
+```text
+*   71aff90 (HEAD -> main) Merge add-health-script
+|\  
+| * f9bdc49 (origin/add-health-script, add-health-script) Add health script
+|/  
+* 2fe262e (origin/main) Add README
+```
+
+Your commit hashes will differ. `--no-ff` keeps a merge commit even when Git could simply move the branch pointer forward, so the history shows that a branch existed. Pull request merges on GitHub can also be set to squash or rebase, which give a different history shape.
+
+</Step>
+<Step>
+
+### Cause a merge conflict on purpose
+
+Two branches that change the same line cannot be merged automatically.
+
+```bash
+git switch -c edit-a
+echo "from A" > note.txt
+git add note.txt && git commit -m "A"
+
+git switch main
+git switch -c edit-b
+echo "from B" > note.txt
+git add note.txt && git commit -m "B"
+
+git switch edit-a
+git merge edit-b
+```
+
+```text
+CONFLICT (add/add): Merge conflict in note.txt
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+Open `note.txt`. Git marked both versions:
+
+```text
+<<<<<<< HEAD
+from A
+=======
+from B
+>>>>>>> edit-b
+```
+
+To resolve it, edit the file to what it should say, then `git add note.txt` and `git commit`. To give up and return to the state before the merge, run `git merge --abort`.
+
+</Step>
+</Steps>
+
+## Production notes
+
+<ProductionNote title="never put secrets in a commit">
+  Anything you commit stays in the history, even if a later commit deletes it. If a password, token or key reaches a pushed branch, treat it as exposed: revoke and replace it first, then clean the history. This matters most on a public portfolio repository, where scanners and other people can read every commit.
+</ProductionNote>
+
+<ProductionNote title="small commits and clear messages">
+  A commit that does one thing is easy to review, easy to revert and easy to find later with `git log`. Write the message for the engineer who is debugging an incident at night and needs to know why the change was made.
+</ProductionNote>
+
+## Interview scenarios
+
+<Scenarios>
+  <Scenario level="beginner" question="What is the difference between a commit and a branch?">
+    A commit is a snapshot of the project that points to its parent. A branch is a name that points to one commit and moves forward when you commit on it. Because a branch is only a pointer, creating one costs almost nothing.
+  </Scenario>
+  <Scenario level="beginner" question="You get a merge conflict. What do you do?">
+    Run `git status` to see which files conflict, open each one and decide what the final text should be, remove the conflict markers, then `git add` the files and commit. If I am unsure what the other person meant, I ask them before choosing. If the merge was a mistake, `git merge --abort` returns to the previous state.
+  </Scenario>
+  <Scenario level="intermediate" question="A teammate pushed an API key to a branch. What do you do first?">
+    Revoke the key and issue a new one, because deleting the commit does not undo exposure once it has been pushed and fetched. Then remove it from the history if the repository needs that, and look at how it got there so a secret scanner or a pre-commit check can catch the next one.
+  </Scenario>
+</Scenarios>

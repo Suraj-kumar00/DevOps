@@ -1,0 +1,133 @@
+---
+title: Portfolio projects
+description: Three projects that prove you can build, ship and run software, with acceptance criteria and a README checklist.
+kind: guide
+---
+
+A portfolio is not a list of tools. It is evidence that you can take a problem from nothing to a working, understandable result. These three projects are sized for the [90-day path](/docs/90-day-path) and build on each other. Each one has **acceptance criteria**, so you know when it is done and cannot quietly stop at "it works on my machine".
+
+## Why projects
+
+Two guides we read make the same point. The freeCodeCamp guide [on landing a first cloud or DevOps role](https://www.freecodecamp.org/news/how-to-land-your-first-cloud-or-devops-role-what-hiring-managers-actually-look-for/) recommends two to three projects that together show the range of DevOps skills. An AWS Builder article, [How to get a job in DevOps](https://builder.aws.com/content/3KSX4f6Yb7417DiEMCH0BzSCbFV/how-to-get-a-job-in-devops), argues that three solid, documented projects do more for a job search than five certificates. A [dev.to troubleshooting post](https://dev.to/techresolve/solved-fresher-self-studying-linuxdevops-feeling-stuck-even-after-lots-of-effort-need-guidance-282j) describes the trap of memorising commands without applying them, and suggests one small but complete end-to-end project as the way out.
+
+These are opinion pieces, not studies, and we have not measured hiring outcomes. They agree with each other, and the advice is cheap to follow, so we follow it.
+
+<Callout type="info" title="You choose the application">
+  The projects do not depend on a specific app. A small web service you wrote, a to-do API or a static site with a health endpoint are all fine. Choose something simple so your effort goes into delivery and operations, not into the app.
+</Callout>
+
+## Project 1: the server health report
+
+**What you build:** a Bash script that checks a Linux machine and prints a short report: disk use, memory, load average and the processes using the most CPU. It exits with a non-zero code when something crosses a threshold.
+
+**Skills it shows:** Linux, shell scripting, exit codes, Git.
+
+<Checklist
+  id="project-1-acceptance"
+  items={[
+    'The script runs on a fresh Linux machine with no extra installs',
+    'Thresholds are set with arguments or environment variables, not edited in the file',
+    'It exits 0 when healthy and non-zero when a threshold is crossed, and you have shown both',
+    'It uses set -o pipefail and handles a missing command with a clear message',
+    'ShellCheck, a free linter for shell scripts, reports no warnings',
+    'A GitHub Actions workflow runs ShellCheck on every push',
+  ]}
+/>
+
+**Stretch:** run it every hour from `cron` or a systemd timer and keep the output in a log file.
+
+## Project 2: the app with a pipeline
+
+**What you build:** a small web application that is built into a container image, tested, and deployed to the cloud automatically when you push to `main`. The cloud resources are created from code, so you can destroy and recreate them.
+
+**Skills it shows:** containers, CI/CD, cloud basics, infrastructure as code, secrets handling.
+
+<Checklist
+  id="project-2-acceptance"
+  items={[
+    'The app runs in a container, and the Dockerfile uses a pinned base image version, not latest',
+    'A pipeline builds, tests and publishes the image on every push to main',
+    'A failing test stops the pipeline, and your README shows a failed run',
+    'The infrastructure is defined in code and can be created and destroyed with one command each',
+    'No secret appears in the repository or its history',
+    'The app has a health endpoint, and the pipeline checks it after deploying',
+    'The README has a diagram of the flow from commit to running service, and the monthly cost',
+  ]}
+/>
+
+**Stretch:** add a staging environment, and require a manual approval before production.
+
+## Project 3: break it and write it up
+
+**What you build:** add monitoring to Project 2, set a target for one thing users care about, then break the system on purpose and write an incident report.
+
+**Skills it shows:** observability, reliability thinking, troubleshooting, clear writing. This is the project that separates you from people who only followed tutorials, because it shows what you do when things go wrong.
+
+<Checklist
+  id="project-3-acceptance"
+  items={[
+    'You collect at least one metric and the application logs, and can show them on a dashboard or in a query',
+    'You defined one target, such as 99.9% of health checks succeed, and calculated its monthly error budget',
+    'You caused at least two different failures, for example stopping the container and deploying a bad version',
+    'For each failure you wrote what you saw, how you found the cause, how you fixed it and what you changed so it is less likely or easier to spot',
+    'At least one fix is automated, such as an alert or an automatic rollback',
+  ]}
+/>
+
+The [DevOps mindset](/docs/devops/devops-mindset) page shows how to calculate the error budget.
+
+### Incident report template
+
+```markdown
+# Incident: <short title>
+
+**Date:** YYYY-MM-DD   **Duration:** <how long users were affected>
+
+## Summary
+What happened, in two sentences.
+
+## Timeline
+- HH:MM  What I noticed, and how
+- HH:MM  What I tried
+- HH:MM  What fixed it
+
+## Cause
+The underlying reason, not only the symptom.
+
+## What I changed
+- A change that makes this less likely
+- A change that makes it faster to spot or fix
+
+## What I would do next
+```
+
+## README checklist
+
+A reader decides in seconds whether to keep reading. Your README should answer, in this order:
+
+<Checklist
+  id="readme-checklist"
+  items={[
+    'What it is, in one sentence, and what problem it solves',
+    'A diagram or screenshot at the top',
+    'How to run it, in numbered steps that someone else has tested',
+    'How it is built and deployed, and why you chose these tools',
+    'What went wrong while building it and what you learned',
+    'What you would do differently, and what is not finished',
+  ]}
+/>
+
+## Showing your work
+
+Doing the work is half of it. The other half is making it visible:
+
+<Checklist
+  id="showing-your-work"
+  items={[
+    'Pin the three repositories on your GitHub profile and write a short profile README',
+    'Keep commits small and messages clear, so the history shows how you think',
+    'Write one public post about the hardest problem you solved, with the incident report as the core',
+    'Ask a working engineer or a community to review one project, and write down what they say',
+    'Put the three project links, not a list of tools, at the top of your CV',
+  ]}
+/>

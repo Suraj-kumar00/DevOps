@@ -3,5 +3,13 @@
   "description": "How this handbook works",
   "icon": "start",
   "root": true,
-  "pages": ["index", "learning-paths", "page-template", "contributing"]
+  "pages": [
+    "index",
+    "90-day-path",
+    "career-routes",
+    "portfolio-projects",
+    "learning-paths",
+    "page-template",
+    "contributing"
+  ]
 }

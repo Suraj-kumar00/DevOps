@@ -49,6 +49,20 @@ stands on, so they are covered too.
 Each track page lists its published pages and its roadmap. The roadmap lives in the page's
 frontmatter, and a topic leaves it as soon as its page is published.
 
+## New to the field?
+
+Start with the plan, not the tools. Everything here is free and has no sign-up.
+
+- [Zero to portfolio: the 90-day path](content/docs/%28start%29/90-day-path.mdx): a 13-week plan
+  with checklists that save your progress in your own browser.
+- [Career routes](content/docs/%28start%29/career-routes.mdx): where to start if you come from
+  outside tech, IT support, software development or university, and what the job market looks like.
+- [Portfolio projects](content/docs/%28start%29/portfolio-projects.mdx): three projects with
+  acceptance criteria, a README checklist and an incident report template.
+
+The [research behind this](docs/research/2026-11-learner-research.md) says what we checked, how
+sure we are and what we could not verify.
+
 ## Notes you can read today
 
 Until a topic has its page, its notes are on Notion. Select a topic to open them.

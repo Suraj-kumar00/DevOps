@@ -1,0 +1,115 @@
+---
+title: The DevOps mindset
+description: How to think like an engineer who runs software, with delivery metrics and error budgets you can calculate.
+level: beginner
+toolVersion: DORA five-metric model
+lastVerified: 2026-11-26
+sources:
+  - title: DORA's software delivery performance metrics
+    url: https://dora.dev/guides/dora-metrics/
+  - title: Embracing Risk, Site Reliability Engineering
+    url: https://sre.google/sre-book/embracing-risk/
+  - title: Implementing SLOs, The Site Reliability Workbook
+    url: https://sre.google/workbook/implementing-slos/
+---
+
+## What and why
+
+Tools change every few years. The way a good infrastructure engineer thinks changes much more slowly, and it is what separates someone who follows a tutorial from someone who can be trusted with a production system.
+
+This page is about that thinking. It has three habits, each tied to something you can measure:
+
+1. **Think in flow.** How long does a change take to reach users, and how often does it go wrong?
+2. **Accept that failure will happen.** Plan how you will notice and recover, because aiming for perfection is both impossible and expensive.
+3. **Decide with numbers.** Reliability is a trade-off, and a number such as an error budget makes the trade-off visible.
+
+## How it works
+
+### Measure delivery with five metrics
+
+The DevOps Research and Assessment (DORA) programme identified five software delivery performance metrics. They fall into two groups: **throughput**, how fast changes move to production, and **instability**, how well those changes go. DORA's own guide describes them this way:
+
+| Group | Metric | Meaning |
+| ----- | ------ | ------- |
+| Throughput | Change lead time | Time from a code commit to a successful production deployment. |
+| Throughput | Deployment frequency | How often changes are deployed to production. |
+| Throughput | Failed deployment recovery time | Time to recover from a deployment that fails and needs immediate intervention. |
+| Instability | Change fail rate | The ratio of deployments that need immediate intervention, likely a rollback. |
+| Instability | Deployment rework rate | Unplanned deployments made as a result of an incident in production. |
+
+DORA's research found that speed and stability are not a trade-off: top performers do well on all five and low performers do poorly on all five. That is the case for small, frequent, automated changes over rare, large releases. DORA also notes that reliability is better seen as operational performance, not as a delivery metric. The metrics are best suited to measuring one application or service at a time.
+
+### Treat reliability as a budget
+
+The Google SRE book makes a point that surprises most beginners: the target is not 100% reliability. Past a certain point, extra reliability costs more than it is worth to users. Instead, a team agrees a **service level objective (SLO)**, such as "99.9% of requests succeed". The **error budget** is what remains: 100% minus the SLO.
+
+As long as the service stays inside its SLO, the team can keep releasing. When failures use up the budget, releases pause while the team invests in making the system more resilient. This replaces an argument about opinions with a shared number.
+
+<Mermaid
+  title="How an error budget guides releases"
+  chart="flowchart TD
+  A[Agree an SLO] --> B[Measure how the service performs]
+  B --> C{Budget left?}
+  C -- yes --> D[Keep releasing changes]
+  C -- no --> E[Pause releases and fix reliability]
+  D --> B
+  E --> B"
+/>
+
+## Hands-on
+
+Calculate an error budget yourself. This was run on Ubuntu 24.04 with awk (any awk works).
+
+How many minutes of failure does a 99.9% SLO allow in a 30-day month?
+
+```bash
+awk 'BEGIN{d=30; slo=99.9; printf "%.1f minutes\n", d*24*60*(100-slo)/100}'
+```
+
+```text
+43.2 minutes
+```
+
+Now see what one more "nine" costs:
+
+```bash
+awk 'BEGIN{d=30; slo=99.99; printf "%.2f minutes\n", d*24*60*(100-slo)/100}'
+```
+
+```text
+4.32 minutes
+```
+
+Ten times less allowed downtime means ten times less time to notice, decide and fix a problem, so it needs automation, redundancy and on-call practice that a 99.9% service may not. This is why "how reliable does it need to be?" is a product question as well as a technical one.
+
+### Exercise: apply the habits to a project
+
+Pick the project you are building and answer these in its README:
+
+- **Flow:** How long does it take from a commit to the change running? What would make it shorter?
+- **Failure:** List three ways it could fail. How would you notice each one? How would you recover?
+- **Numbers:** Pick one thing users care about, such as "the page loads", and set a target for it. What would the error budget be for a month?
+
+## Production notes
+
+<ProductionNote title="metrics are for learning, not for ranking people">
+  Delivery metrics describe a team's system. If they are used to compare individuals or to set targets that people then chase, people will game the numbers and the metrics stop telling the truth. Use them to find the part of the pipeline that is slowest or most fragile.
+</ProductionNote>
+
+<ProductionNote title="an SLO nobody acts on is decoration">
+  An SLO is only useful if something changes when the budget runs low, such as pausing risky releases. Agree what happens at that point before you need it, and write it down with the people who own the product.
+</ProductionNote>
+
+## Interview scenarios
+
+<Scenarios>
+  <Scenario level="beginner" question="Why would a team deploy small changes often instead of one big release every month?">
+    Small changes are easier to review, to test and to roll back, and when one goes wrong it is clear which change caused it. DORA's research found throughput and stability move together, so teams that deploy frequently tend to also recover faster and fail less, not more.
+  </Scenario>
+  <Scenario level="intermediate" question="Product asks for 100% uptime. How do you respond?">
+    I explain that the cost rises sharply with each extra nine and that past a certain point users cannot notice the difference, since their own network or device is less reliable. I ask what users need, propose an SLO such as 99.9%, show that this allows about 43 minutes of failure in a 30-day month, and use the remaining error budget to decide how fast we can ship.
+  </Scenario>
+  <Scenario level="intermediate" question="Your service has used up its error budget for the quarter. What happens?">
+    Following the SRE approach, risky feature releases pause while the team puts effort into reliability: finding the causes of the failures, improving testing, adding safeguards. Releases resume when the service is back within its SLO. The point is that the rule was agreed beforehand, so it is not a debate between developers and operations during an outage.
+  </Scenario>
+</Scenarios>

@@ -1,0 +1,177 @@
+---
+title: Linux essentials
+description: Files, permissions, processes and exit codes, learned by analysing a log file on a real machine.
+level: beginner
+toolVersion: Ubuntu 24.04 (bash 5.2, GNU coreutils 9.4)
+lastVerified: 2026-11-26
+sources:
+  - title: chmod(1), Linux manual page
+    url: https://man7.org/linux/man-pages/man1/chmod.1.html
+  - title: grep(1), Linux manual page
+    url: https://man7.org/linux/man-pages/man1/grep.1.html
+  - title: bash(1), Linux manual page
+    url: https://man7.org/linux/man-pages/man1/bash.1.html
+  - title: du(1), Linux manual page
+    url: https://man7.org/linux/man-pages/man1/du.1.html
+  - title: df(1), Linux manual page
+    url: https://man7.org/linux/man-pages/man1/df.1.html
+  - title: inode(7), Linux manual page
+    url: https://man7.org/linux/man-pages/man7/inode.7.html
+---
+
+## What and why
+
+Almost every server, container and Kubernetes node you will run as a DevOps engineer runs Linux. When a deployment fails at 2 a.m., the answer is usually found at a Linux shell: which process is running, who owns this file, why is the disk full.
+
+You do not need to memorise hundreds of commands. You need four ideas, and the rest is looking things up in the manual pages:
+
+1. **Everything is reached through the file system.** Logs, configuration and even devices are files you can read with the same tools.
+2. **Every file has an owner and permission bits.** This decides who can read, change or run it.
+3. **Commands are small and connect through pipes.** One command's output becomes the next one's input.
+4. **Every command ends with an exit code.** `0` means success, anything else means failure, and scripts and CI pipelines rely on it.
+
+## How it works
+
+A command you type is run by the shell (here, bash). The shell starts a process, connects its input and output, waits for it to finish and keeps its exit code in `$?`.
+
+<Mermaid
+  title="What happens when you run a pipeline"
+  chart="flowchart LR
+  A[You type a pipeline] --> B[Shell starts one process per command]
+  B --> C[Each output flows through a pipe into the next command]
+  C --> D[Final output appears in your terminal]
+  D --> E[Shell keeps the exit code of the last command]"
+/>
+
+### Permissions
+
+`ls -l` shows ten characters before the file name, for example `-rw-r-----`. The first says what kind of file it is (`-` is a regular file). The next nine are three groups of read, write and execute: for the **owner**, the **group** and **everyone else**. In numeric form, read is 4, write is 2 and execute is 1, and you add them up for each group. So `640` means the owner can read and write (4+2), the group can read (4) and everyone else has no access (0). The details are in [chmod(1)](https://man7.org/linux/man-pages/man1/chmod.1.html).
+
+## Hands-on
+
+This exercise was run on Ubuntu 24.04 with bash 5.2 and GNU coreutils 9.4. You need only a terminal. Any Linux machine, a virtual machine or WSL on Windows works.
+
+You will create a small log file, then find out which error happens most.
+
+<Steps>
+<Step>
+
+### Create a practice folder and a log file
+
+```bash
+mkdir -p lab/logs && cd lab
+printf 'INFO start\nERROR db timeout\nINFO ok\nERROR disk full\nERROR db timeout\n' > logs/app.log
+ls -l logs/app.log
+```
+
+```text
+-rw-r--r-- 1 root root 69 Nov 26 12:53 logs/app.log
+```
+
+The owner and group names on your machine will be your own user name, not `root`.
+
+</Step>
+<Step>
+
+### Count the errors
+
+```bash
+grep -c ERROR logs/app.log
+```
+
+```text
+3
+```
+
+`-c` prints the number of matching lines instead of the lines. See [grep(1)](https://man7.org/linux/man-pages/man1/grep.1.html).
+
+</Step>
+<Step>
+
+### Rank the errors with a pipeline
+
+```bash
+grep ERROR logs/app.log | sort | uniq -c | sort -rn
+```
+
+```text
+      2 ERROR db timeout
+      1 ERROR disk full
+```
+
+Each command does one small job: `grep` keeps the error lines, `sort` puts identical lines next to each other, `uniq -c` counts runs of identical lines, and `sort -rn` ranks the counts from highest to lowest. This pattern solves a large share of real log-analysis questions.
+
+</Step>
+<Step>
+
+### Restrict who can read the file
+
+```bash
+chmod 640 logs/app.log
+ls -l logs/app.log
+stat -c '%a %U' logs/app.log
+```
+
+```text
+-rw-r----- 1 root root 69 Nov 26 12:53 logs/app.log
+640 root
+```
+
+</Step>
+<Step>
+
+### See a permission error and read its exit code
+
+A user who is not the owner and not in the group now gets nothing. On the test machine this was checked as the unprivileged `nobody` user:
+
+```bash
+setpriv --reuid=65534 --regid=65534 --clear-groups cat logs/app.log
+echo "exit=$?"
+```
+
+```text
+cat: logs/app.log: Permission denied
+exit=1
+```
+
+The `setpriv` command needs administrator rights, so run it with `sudo` on your own machine. The lesson is the pair of lines: the error message tells a human what happened, and the exit code tells a script.
+
+</Step>
+</Steps>
+
+### Check your understanding
+
+Before you read on, answer these without running anything:
+
+- What would `chmod 600 logs/app.log` change compared with `640`?
+- Why does `uniq -c` need `sort` before it?
+
+`600` removes read access for the group. `uniq` only merges identical lines that are next to each other, so without `sort` repeated errors that are apart are counted separately.
+
+## Production notes
+
+<ProductionNote title="a pipeline hides failures unless you ask">
+  A pipeline's exit code is the exit code of its **last** command. In bash, `false | true` returns `0` even though `false` failed. With `set -o pipefail` the pipeline fails if any command in it fails; the same test returned `1`. In a CI job or a script, a pipeline that quietly swallows an error is how a broken step is reported as green. See the `pipefail` option in [bash(1)](https://man7.org/linux/man-pages/man1/bash.1.html).
+</ProductionNote>
+
+<ProductionNote title="chmod 777 is not a fix">
+  When something says "permission denied", the fix is to find out who needs which access, not to open the file to everyone. Check the owner and group with `ls -l`, then grant the smallest permission that works. Opening a file or directory to all users also opens it to every process that runs on that machine.
+</ProductionNote>
+
+<ProductionNote title="a full disk has two causes">
+  The disk can be out of space (`df -h`) or out of inodes, the records that describe files (`df -i`). Millions of tiny files exhaust inodes while plenty of space remains. See [df(1)](https://man7.org/linux/man-pages/man1/df.1.html) and [inode(7)](https://man7.org/linux/man-pages/man7/inode.7.html).
+</ProductionNote>
+
+## Interview scenarios
+
+<Scenarios>
+  <Scenario level="beginner" question="A script exits with 0 but you can see in the output that one of its commands failed. What would you check?">
+    Look at how the failing command is run. If it is inside a pipeline, only the last command's exit code counts, so an earlier failure is hidden. Add `set -o pipefail` and check exit codes explicitly where a failure matters. Then run the script again and confirm that the failure now changes the exit code.
+  </Scenario>
+  <Scenario level="beginner" question="You deploy an app and it cannot read its config file: permission denied. How do you debug it?">
+    Find which user the process runs as, then run `ls -l` on the file and on each directory above it, because a user needs execute permission on every directory in the path. Compare the file's owner, group and mode with the process user. Fix it by changing the group or owner or granting the narrowest mode that works. Avoid `chmod 777`.
+  </Scenario>
+  <Scenario level="intermediate" question="A server reports that the disk is full, but `df -h` shows free space. What could be happening?">
+    The file system may be out of inodes, which `df -i` shows. That happens when a directory collects a huge number of small files, for example session files or cache entries. Find the directory with a large file count, delete or rotate its contents, and add cleanup so it does not recur.
+  </Scenario>
+</Scenarios>
