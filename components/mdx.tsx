@@ -6,6 +6,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { TypeTable } from 'fumadocs-ui/components/type-table';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import type { MDXComponents } from 'mdx/types';
+import { Checklist } from '@/components/mdx/checklist';
 import { Mermaid } from '@/components/mdx/mermaid';
 import { ProductionNote } from '@/components/mdx/production-note';
 import { Scenario, Scenarios } from '@/components/mdx/scenario';
@@ -31,6 +32,7 @@ export function getMDXComponents(components?: MDXComponents) {
     Tab,
     Tabs,
     Mermaid,
+    Checklist,
     ProductionNote,
     Scenario,
     Scenarios,

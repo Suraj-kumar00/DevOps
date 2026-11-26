@@ -1,0 +1,168 @@
+---
+title: "Zero to portfolio: the 90-day path"
+description: A 13-week plan from your first Linux command to three public, working projects, with a checklist that saves your progress in your browser.
+kind: guide
+---
+
+This path is for career switchers, students and juniors who want to get into DevOps, platform, cloud or SRE work and do not know what to learn in which order. It ends with **three public projects** that you built, ran and can explain.
+
+The order matters more than the number of tools. Beginners often start with Kubernetes and stall because it sits on top of Linux, networking and containers. This path builds from the bottom up and has you build something at the end of every phase.
+
+<Callout type="info" title="Assumptions you can change">
+  The plan assumes about 10 hours a week, which is our estimate and not a measured figure. If you have less time, stretch each week into two. If you already know a phase, skip it. Pick your starting point on the [career routes](/docs/career-routes) page.
+</Callout>
+
+## The three rules
+
+1. **Build before you feel ready.** Read a page, then do the exercise on a real machine the same day. Watching tutorials without building is a trap that [other guides](/docs/portfolio-projects#why-projects) describe too.
+2. **Everything you build goes on GitHub from day one.** A public history of small commits is proof of steady work.
+3. **Write it down.** After each project, write a README that explains what it does, how to run it and what you would change. Explaining is the skill interviews test.
+
+## The plan at a glance
+
+<Mermaid
+  title="The three phases of the 90-day path"
+  chart="flowchart LR
+  A[Phase 1: Foundations, weeks 1 to 4] --> B[Phase 2: Ship it, weeks 5 to 9]
+  B --> C[Phase 3: Run it, weeks 10 to 13]
+  A -.-> P1[Project 1: server health script]
+  B -.-> P2[Project 2: app with CI pipeline on the cloud]
+  C -.-> P3[Project 3: monitored app with an incident write-up]"
+/>
+
+## Phase 1: Foundations (weeks 1 to 4)
+
+Goal: be comfortable on a Linux machine, use Git every day and automate a small task.
+
+<Steps>
+<Step>
+
+### Weeks 1 and 2: Linux and Git
+
+Work through [Linux essentials](/docs/foundations/linux) and [Git essentials](/docs/foundations/git). Both have exercises you run yourself.
+
+<Checklist
+  id="phase-1-linux-git"
+  items={[
+    'Set up a Linux machine you can break: a virtual machine, WSL or a spare computer',
+    'Complete the Linux essentials hands-on and answer its check-your-understanding questions',
+    'Create a GitHub account and a public repository named after your learning journal',
+    'Complete the Git essentials hands-on, including the merge conflict',
+    'Make at least one commit on each of five different days',
+  ]}
+/>
+
+</Step>
+<Step>
+
+### Weeks 3 and 4: Networking and shell scripting, then Project 1
+
+Read the interim notes on [networking](https://surajkumar00.notion.site/Computer-Networking-7ebc4910536249329bbc21563899d621) and [shell scripting](https://surajkumar00.notion.site/Shell-Bash-Scripting-a250e00baeaa4506b43e4429f18c065c) while the full pages are being written. Then build [Project 1: the server health report](/docs/portfolio-projects#project-1-the-server-health-report).
+
+<Checklist
+  id="phase-1-network-shell"
+  items={[
+    'Explain in your own words what happens between typing a URL and seeing a page (DNS, TCP, TLS, HTTP)',
+    'Write a Bash script that uses set -o pipefail and returns a non-zero exit code on failure',
+    'Finish Project 1 and push it to a public repository',
+    'Write the Project 1 README using the checklist on the projects page',
+  ]}
+/>
+
+</Step>
+</Steps>
+
+## Phase 2: Ship it (weeks 5 to 9)
+
+Goal: take an application from your laptop to a running service, with every step automated.
+
+<Steps>
+<Step>
+
+### Weeks 5 and 6: Containers and CI
+
+Learn containers with the interim notes on [Docker](https://surajkumar00.notion.site/Containerization-Docker-0d09fa2b92dd46ac9e938e573bb10e64) and automation with the notes on [CI/CD](https://surajkumar00.notion.site/CI-CD-e999decefb8243a2b613a304bf1fe38b). Read [The DevOps mindset](/docs/devops/devops-mindset) alongside, because it explains why you automate.
+
+<Checklist
+  id="phase-2-containers-ci"
+  items={[
+    'Containerise a small web application you wrote or found, and run it locally',
+    'Explain the difference between an image and a container',
+    'Build the image automatically on every push with a CI pipeline',
+    'Make the pipeline fail when a test fails, and show it failing once',
+  ]}
+/>
+
+</Step>
+<Step>
+
+### Weeks 7 to 9: Cloud, infrastructure as code, then Project 2
+
+Pick one cloud provider and stay with it: [AWS](https://surajkumar00.notion.site/Learning-AWS-7399a5eaa9674b44932ee52374110629) or [Azure](https://surajkumar00.notion.site/Learning-Microsoft-Azure-a5abd9814d134f1f9f6f1a4dba09b501). Learn [infrastructure as code](https://surajkumar00.notion.site/Infrastructure-as-code-81a1e5e6f9e442e4bf8799151dec35c2) so the infrastructure is recreated from files, not from clicks. Then build [Project 2](/docs/portfolio-projects#project-2-the-app-with-a-pipeline).
+
+<Callout type="warn" title="Watch the cost">
+  Cloud providers can charge you for resources you forget about. Set a billing alert before you create anything, and destroy what you built after each session. Read your provider's current free-tier terms yourself, because they change.
+</Callout>
+
+<Checklist
+  id="phase-2-cloud-iac"
+  items={[
+    'Set up a billing alert on your cloud account before creating resources',
+    'Create a server or container service from code, and destroy it from code',
+    'Deploy Project 2 from the pipeline, with no manual steps after a push',
+    'Add a diagram and a "what it costs per month" section to the Project 2 README',
+  ]}
+/>
+
+</Step>
+</Steps>
+
+## Phase 3: Run it (weeks 10 to 13)
+
+Goal: operate what you built, and show that you can reason about failure.
+
+<Steps>
+<Step>
+
+### Weeks 10 and 11: Kubernetes and observability
+
+Learn the basics of [Kubernetes](https://surajkumar00.notion.site/Container-Orchatration-Kubernetes-c43869b2dda84e1c8c6218de5b5bdc43) on a local cluster first, which costs nothing. Then add metrics and logs so you can see what the system is doing. The [DevOps track](/docs/devops) lists what is coming.
+
+<Checklist
+  id="phase-3-kubernetes-observability"
+  items={[
+    'Run your application on a local Kubernetes cluster',
+    'Explain what a Deployment and a Service do',
+    'Collect at least one metric and one log stream from the running app',
+    'Set a target for one thing users care about, and calculate its monthly error budget',
+  ]}
+/>
+
+</Step>
+<Step>
+
+### Weeks 12 and 13: Project 3 and going public
+
+Build [Project 3: break it and write it up](/docs/portfolio-projects#project-3-break-it-and-write-it-up), then follow the [showing your work](/docs/portfolio-projects#showing-your-work) steps.
+
+<Checklist
+  id="phase-3-project-and-public"
+  items={[
+    'Break your own system on purpose and recover it',
+    'Write an incident report: what happened, how you noticed, how you fixed it, what you changed',
+    'Pin your three projects on your GitHub profile',
+    'Share what you built in public once, and ask one person for a review',
+  ]}
+/>
+
+</Step>
+</Steps>
+
+## After day 90
+
+You now have evidence instead of a list of courses. Keep going in the direction that matches the work you want:
+
+- **Security-minded delivery:** the [DevSecOps track](/docs/devsecops).
+- **Machine learning in production:** the [MLOps](/docs/mlops) and [LLMOps](/docs/llmops) tracks.
+- **GPUs and AI workloads on Kubernetes:** the [AI Infrastructure track](/docs/ai-infra).
+- **Interviews:** every topic page ends with scenarios tagged by level. See [learning paths](/docs/learning-paths#preparing-for-interviews).

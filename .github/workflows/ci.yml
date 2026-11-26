@@ -49,7 +49,7 @@ jobs:
             curl -fs http://127.0.0.1:3000/api/health > /dev/null && break
             sleep 1
           done
-          for path in / /docs /docs/ai-infra /docs/page-template /blogs /llms.txt /docs/ai-infra.md /sitemap.xml; do
+          for path in / /docs /docs/ai-infra /docs/page-template /docs/90-day-path /docs/foundations/linux /blogs /llms.txt /docs/ai-infra.md /sitemap.xml; do
             curl -fsS -o /dev/null -w "%{http_code} ${path}\n" "http://127.0.0.1:3000${path}"
           done
 
